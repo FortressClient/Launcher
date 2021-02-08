@@ -8,11 +8,11 @@
 }
 
 .blogtitle::after {
-   content: "1.8.9 Public Beta";
+   content: "Welcome to Fortress Client!";
 }
 
 .blogcontent::after {
    white-space: pre-wrap;
    font-weight: bold;
-   content: "Hey everyone! We know we've been quiet about our 1.8.9 release date, but we're back. We're happy to announce that we will be doing a public beta for Fortress Client 1.8.9! This public beta will take place sometime early this month, and will last one week, and will change significantly throughout the week of the beta. \a \a We also want to thank you all for over 400 users on Fortress Client, we've been hard at work to make the client a fun experience for everyone, there will be only more to come. \a \a We've got huge plans for Fortress Client that will be release in the coming days. Stay tuned.";
+   content: "Welcome to the Fortress Client Launcher!";
 }
