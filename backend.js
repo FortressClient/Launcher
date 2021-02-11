@@ -30,11 +30,11 @@ function checkPatch() { // This Method fixes the client from downloading itself 
   var version3 = document.querySelector('.version-button3').innerHTML
 
   if (version2 == "✔️1.8.9") {
-    alert("Aero Client 1.16 is not released, we will announce when it is though!");
+    alert("Fortress Client 1.8.9 is not released, we will announce when it is though!");
     showLauncher();
     //checkSecondPatch();
   } else if(version3 == "✔️1.16") {
-    alert("Aero Client 1.16 is not released, we will announce when it is though!");
+    alert("Fortress Client 1.16 is not released, we will announce when it is though!");
     showLauncher();
   } else if (version1 == "✔️1.7.10 (Default)") {
     checkFirstPatch();
@@ -43,11 +43,11 @@ function checkPatch() { // This Method fixes the client from downloading itself 
 }
 
 function checkFirstPatch() {
-  if (!(fs.existsSync(getAppDataPath('.minecraft/versions/AeroClient-1.7.10/AeroClient-1.7.10.patch')))) { // If the client doesn't exist it will download the client.
+  if (!(fs.existsSync(getAppDataPath('.minecraft/versions/FortressClient-1.7.10/FortressClient-1.7.10.jar')))) { // If the client doesn't exist it will download the client.
   launchClient1();
   }
 
-    var hash = clientPatch.sync(getAppDataPath('.minecraft/versions/AeroClient-1.7.10/AeroClient-1.7.10.patch'));
+    var hash = clientPatch.sync(getAppDataPath('.minecraft/versions/FortressClient-1.7.10/FortressClient-1.7.10.jar'));
     console.log("Current Client Hash - " + hash)
     if (hash == "42f6d5df4b3d683d6c46e9569cdf6d6342431635") { // Checks the SHA1 Hash to see if it's outdated or not.
       launchOffline1();
@@ -59,11 +59,11 @@ function checkFirstPatch() {
 
 function checkSecondPatch() {
 
-  if (!(fs.existsSync(getAppDataPath('.minecraft/versions/AeroClient-1.8.9/AeroClient-1.8.9.patch')))) {
+  if (!(fs.existsSync(getAppDataPath('.minecraft/versions/FortressClient-1.8.9/FortressClient-1.8.9.jar')))) {
     launchClient1();
   }
   
-    var hash2 = clientPatch.sync(getAppDataPath('.minecraft/versions/AeroClient-1.8.9/AeroClient-1.8.9.patch'));
+    var hash2 = clientPatch.sync(getAppDataPath('.minecraft/versions/FortressClient-1.8.9/FortressClient-1.8.9.jar'));
     console.log("Current Client Hash - " + hash2)
     if (hash2 == "Coming Soon") {
       launchOffline2();
@@ -76,23 +76,23 @@ async function launchClient2() {
      document.querySelector('.launch-button').className += " clicked";
      document.getElementById('launchButton').innerHTML = "Updating Patch"
    
-     console.log("[Aero Client] Launching Stable Branch");
+     console.log("[Fortress Client] Launching Stable Branch");
      client.launch({ 
        authorization: Authenticator.getAuth("User"),
-       clientPackage: "https://github.com/Aero-Client/StableBranch/releases/download/1.0/AeroClient-1.8.9.zip",
+       clientPackage: "https://github.com/Lxnden1/web/releases/download/3.0/FortressClient-1.8.9.zip",
        removePackage: "clientPackage.zip",
        root: getAppDataPath(".minecraft"),
-       javaPath: getAppDataPath("aeroclient/jre/bin/java.exe"),
+       javaPath: getAppDataPath("fortressclient/jre/bin/java.exe"),
        version: {
          number: "1.8.9",
-         custom: "AeroClient-1.8.9"
+         custom: "FortressClient-1.8.9"
        },
        memory: {
            max: document.getElementById("ramslider").value,
            min: "1024"
        },
        overrides: {
-         minecraftJar: getAppDataPath(".minecraft/versions/AeroClient-1.8.9/AeroClient-1.8.9.patch"),
+         minecraftJar: getAppDataPath(".minecraft/versions/FortressClient-1.8.9/FortressClient-1.8.9.jar"),
        }
    }).catch(e => {
        console.log(e.message);
@@ -104,21 +104,21 @@ async function launchOffline2() {
   document.querySelector('.launch-button').className += " clicked"
   document.getElementById('launchButton').innerHTML = "Starting JVM"
   
-  console.log("[Aero Client] Launching Stable Branch");
+  console.log("[Fortress Client] Launching Stable Branch");
   client.launch({ 
     authorization: Authenticator.getAuth("User"),
     root: getAppDataPath(".minecraft"),
-    javaPath: getAppDataPath("aeroclient/jre/bin/java.exe"),
+    javaPath: getAppDataPath("fortressclient/jre/bin/java.exe"),
     version: {
       number: "1.8.9",
-      custom: "AeroClient-1.8.9"
+      custom: "FortressClient-1.8.9"
     },
     memory: {
         max: document.getElementById("ramslider").value,
         min: "1024"
     },
     overrides: {
-      minecraftJar: getAppDataPath(".minecraft/versions/AeroClient-1.8.9/AeroClient-1.8.9.patch"),
+      minecraftJar: getAppDataPath(".minecraft/versions/FortressClient-1.8.9/FortressClient-1.8.9.patch"),
     }
   }).catch(e => {
     console.log(e.message);
@@ -131,10 +131,10 @@ async function launchOffline2() {
     var branch3 = document.querySelector('.branch-button3').innerHTML
   
    if(branch2 == "✔️Beta") {
-      console.log("[Aero Client] Checked Beta Branch");
+      console.log("[Fortress Client] Checked Beta Branch");
       launchClient2();
     } else if(branch3 == "✔️Dev") {
-      console.log("[Aero Client] Checked Dev Branch");
+      console.log("[Fortress Client] Checked Dev Branch");
       launchClient3();
     }
   }
