@@ -25,28 +25,15 @@ function banUser() {
   }
 
 function checkPatch() { // This Method fixes the client from downloading itself everytime.
-  var version1 = document.querySelector('.version-button1').innerHTML
-  var version2 = document.querySelector('.version-button2').innerHTML
-  var version3 = document.querySelector('.version-button3').innerHTML
-
-  if (version1 == "✔️1.7.10 (Default)") {
     checkFirstPatch();
-  } else if (version2 == "✔️1.8.9") {
-    alert("Fortress Client 1.8.9 is not released, we will announce when it is though!");
-    showLauncher();
-  } else if(version3 == "️✔️1.16") {
-    alert("Fortress Client 1.16 is not released, we will announce when it is though!");
-    showLauncher();
-  }
-
 }
 
 function checkFirstPatch() {
-  if (!(fs.existsSync(getAppDataPath('.minecraft/versions/FortressClient-1.7.10/FortressClient-1.7.10.jar')))) { // If the client doesn't exist it will download the client.
+  if (!(fs.existsSync(getAppDataPath('.minecraft/versions/FortressClient-1.7.10/FortressClient-1.7.10.patch')))) { // If the client doesn't exist it will download the client.
     launchClient1();
   }
 
-    var hash = clientPatch.sync(getAppDataPath('.minecraft/versions/FortressClient-1.7.10/FortressClient-1.7.10.jar'));
+    var hash = clientPatch.sync(getAppDataPath('.minecraft/versions/FortressClient-1.7.10/FortressClient-1.7.10.patch'));
     console.log("Current Client Hash - " + hash)
     if (hash == "b33933cb4b817c6869f156d38c438330e51fc2ba") { // Checks the SHA1 Hash to see if it's outdated or not. (1.7.10)
       launchOffline1();
@@ -57,11 +44,11 @@ function checkFirstPatch() {
 }
 
 function checkSecondPatch() {
-  if (!(fs.existsSync(getAppDataPath('.minecraft/versions/FortressClient-1.8.9/FortressClient-1.8.9.jar')))) {
+  if (!(fs.existsSync(getAppDataPath('.minecraft/versions/FortressClient-1.8.9/FortressClient-1.8.9.patch')))) {
     launchClient2();
   }
   
-    var hash2 = clientPatch.sync(getAppDataPath('.minecraft/versions/FortressClient-1.8.9/FortressClient-1.8.9.jar')); // (1.8.9)
+    var hash2 = clientPatch.sync(getAppDataPath('.minecraft/versions/FortressClient-1.8.9/FortressClient-1.8.9.patch')); // (1.8.9)
     console.log("Current Client Hash - " + hash2)
     if (hash2 == "f9080813325b83f28d240c9faa89d45516d925e8") {
       launchOffline2();
@@ -91,7 +78,7 @@ async function launchClient2() {
            min: "1024"
        },
        overrides: {
-         minecraftJar: getAppDataPath(".minecraft/versions/FortressClient-1.8.9/FortressClient-1.8.9.jar"),
+         minecraftJar: getAppDataPath(".minecraft/versions/FortressClient-1.8.9/FortressClient-1.8.9.patch"),
        }
    }).catch(e => {
        console.log(e.message);
@@ -117,7 +104,7 @@ async function launchOffline2() {
         min: "1024"
     },
     overrides: {
-      minecraftJar: getAppDataPath(".minecraft/versions/FortressClient-1.8.9/FortressClient-1.8.9.jar"),
+      minecraftJar: getAppDataPath(".minecraft/versions/FortressClient-1.8.9/FortressClient-1.8.9.patch"),
     }
   }).catch(e => {
     console.log(e.message);
