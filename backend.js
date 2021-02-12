@@ -8,8 +8,8 @@ function banUser() {
   function startupChecks() {
     document.getElementById('launchButton').innerHTML = "Contacting ACP"; // If frozen at this text just run as admin it should be fine
     document.getElementById('launchButton').style.backgroundColor = " rgba(109, 0, 252, 0.671)";
-    fs.truncate(getAppDataPath('aeroclient/client_logs.txt'), 0, function(){console.log('[Launcher] Reset Client Log File')});
-    fs.truncate(getAppDataPath('aeroclient/launcher_logs.txt'), 0, function(){console.log('[Launcher] Reset Launcher Log File')});
+    fs.truncate(getAppDataPath('fortressclient/client_logs.txt'), 0, function(){console.log('[Launcher] Reset Client Log File')});
+    fs.truncate(getAppDataPath('fortressclient/launcher_logs.txt'), 0, function(){console.log('[Launcher] Reset Launcher Log File')});
     bannedCheck();
   }
   
@@ -29,27 +29,26 @@ function checkPatch() { // This Method fixes the client from downloading itself 
   var version2 = document.querySelector('.version-button2').innerHTML
   var version3 = document.querySelector('.version-button3').innerHTML
 
-  if (version2 == "✔️1.8.9") {
+  if (version1 == "✔️1.7.10 (Default)") {
+    checkFirstPatch();
+  } else if (version2 == "✔️1.8.9") {
     alert("Fortress Client 1.8.9 is not released, we will announce when it is though!");
     showLauncher();
-    //checkSecondPatch();
-  } else if(version3 == "✔️1.16") {
+  } else if(version3 == "️✔️1.16") {
     alert("Fortress Client 1.16 is not released, we will announce when it is though!");
     showLauncher();
-  } else if (version1 == "✔️1.7.10 (Default)") {
-    checkFirstPatch();
   }
 
 }
 
 function checkFirstPatch() {
   if (!(fs.existsSync(getAppDataPath('.minecraft/versions/FortressClient-1.7.10/FortressClient-1.7.10.jar')))) { // If the client doesn't exist it will download the client.
-  launchClient1();
+    launchClient1();
   }
 
     var hash = clientPatch.sync(getAppDataPath('.minecraft/versions/FortressClient-1.7.10/FortressClient-1.7.10.jar'));
     console.log("Current Client Hash - " + hash)
-    if (hash == "42f6d5df4b3d683d6c46e9569cdf6d6342431635") { // Checks the SHA1 Hash to see if it's outdated or not.
+    if (hash == "b33933cb4b817c6869f156d38c438330e51fc2ba") { // Checks the SHA1 Hash to see if it's outdated or not. (1.7.10)
       launchOffline1();
     } else {
       launchClient1(); // If the SHA1 Hash is different then it will download the client.
@@ -58,18 +57,18 @@ function checkFirstPatch() {
 }
 
 function checkSecondPatch() {
-
   if (!(fs.existsSync(getAppDataPath('.minecraft/versions/FortressClient-1.8.9/FortressClient-1.8.9.jar')))) {
-    launchClient1();
+    launchClient2();
   }
   
-    var hash2 = clientPatch.sync(getAppDataPath('.minecraft/versions/FortressClient-1.8.9/FortressClient-1.8.9.jar'));
+    var hash2 = clientPatch.sync(getAppDataPath('.minecraft/versions/FortressClient-1.8.9/FortressClient-1.8.9.jar')); // (1.8.9)
     console.log("Current Client Hash - " + hash2)
-    if (hash2 == "Coming Soon") {
+    if (hash2 == "f9080813325b83f28d240c9faa89d45516d925e8") {
       launchOffline2();
     } else {
       launchClient2();
     }
+    
 }
 
 async function launchClient2() {
@@ -79,7 +78,7 @@ async function launchClient2() {
      console.log("[Fortress Client] Launching Stable Branch");
      client.launch({ 
        authorization: Authenticator.getAuth("User"),
-       clientPackage: "https://github.com/Lxnden1/web/releases/download/3.0/FortressClient-1.8.9.zip",
+       clientPackage: "https://github.com/FortressClient/StableBranch/releases/download/1.0/FortressClient-1.8.9.zip",
        removePackage: "clientPackage.zip",
        root: getAppDataPath(".minecraft"),
        javaPath: getAppDataPath("fortressclient/jre/bin/java.exe"),
@@ -118,7 +117,7 @@ async function launchOffline2() {
         min: "1024"
     },
     overrides: {
-      minecraftJar: getAppDataPath(".minecraft/versions/FortressClient-1.8.9/FortressClient-1.8.9.patch"),
+      minecraftJar: getAppDataPath(".minecraft/versions/FortressClient-1.8.9/FortressClient-1.8.9.jar"),
     }
   }).catch(e => {
     console.log(e.message);
